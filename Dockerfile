@@ -11,7 +11,7 @@ WORKDIR /src/sysgen
 # sometimes sysgen fails ar random points, run until it build successfully
 RUN until ./sysgen.py --timeout 500 --version ${RELEASE_VERSION} --CONTINUE; do echo "Failed, rerunning"; done
 
-## Now build thh
+## Now build the
 FROM cob2k25/hercules
 COPY --from=sysgen /sysgen/MVSCE /MVSCE
 COPY mvs.sh /
