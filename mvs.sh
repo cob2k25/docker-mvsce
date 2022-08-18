@@ -29,10 +29,10 @@ if [ ! -f /config/local/custom.cnf ]; then
     sed 's_conf/local/_/config/local/_g' MVSCE/conf/local/custom.cnf > /config/local/custom.cnf
 fi
 
-for conf in MVSCE/conf/local/*; do 
-    if  cmp -s "$conf" "/config/local/$(basename $conf)" ; then 
+for conf in MVSCE/conf/local/*; do
+    if  cmp -s "$conf" "/config/local/$(basename $conf)" ; then
         echo "[*] /config/local/$(basename $conf) no changes"
-    else 
+    else
         # Check which file is newer
         if [ "$conf" -nt "/config/local/$(basename $conf)" ]; then
             # backup the previous config if it exists
@@ -41,12 +41,12 @@ for conf in MVSCE/conf/local/*; do
             sed 's_conf/local/_/config/local/_g' -i "/config/local/$(basename $conf)"
             # check to make sure the config exists in custom.cnf
             if $(grep -L "/config/local/$(basename $conf)" /config/local/custom.cnf) ; then
-                # if not then we add it   
+                # if not then we add it
                 echo "INCLUDE /config/local/$(basename $conf)" >> /config/local/custom.cnf
             fi
         fi
     fi
-done 
+done
 
 
 
@@ -67,7 +67,6 @@ if [ ! -f /certs/ftp.pem ]; then
 
 fi
 
-
 if [ ! -f /certs/3270.pem ]; then
     echo "[*] /certs/3270.pem does not exist... generating"
     openssl req -x509 -nodes -days 365 \
@@ -85,4 +84,5 @@ echo "[*] Starting encrypted TN3270 listener on port 3223"
 
 cd MVSCE
 echo "[*] Starting Hercules"
-hercules -f /config/local.cnf -r conf/mvsce.rc --daemon > /logs/hercules.log
+#hercules -f /config/local.cnf -r conf/mvsce.rc --daemon > /logs/hercules.log
+hercules -f /config/local.cnf -r conf/mvsce.rc
