@@ -1,4 +1,5 @@
 FROM mainframed767/mvsce:latest
+
 # # Build MVSCE
 # # If this is a point release use docker --build-arg RELEASE_VERSION=V#R#M#
 # FROM cob2k25/hercules:2b505c409831b65f15047653a8a6a3736c44889a as sysgen
@@ -16,9 +17,11 @@ FROM mainframed767/mvsce:latest
 # ## Now build the
 # FROM cob2k25/hercules:2b505c409831b65f15047653a8a6a3736c44889a
 # COPY --from=sysgen /sysgen/MVSCE /MVSCE
-COPY mvs.sh /
+WORKDIR /MVSCE
+COPY mvs.sh .
+RUN chmod +x mvs.sh
 # RUN apt-get update && apt-get -yq install --no-install-recommends socat ca-certificates openssl python3 netbase git && apt-get clean && chmod +x /mvs.sh
 # VOLUME ["/config","/dasd","/printers","/punchcards","/logs", "/certs"]
 # EXPOSE 3221 3223 3270 3505 3506 8888
 
-# ENTRYPOINT ["./mvs.sh"]
+ENTRYPOINT ["/MVSCE/mvs.sh"]
