@@ -3,6 +3,8 @@
 # to the /config and /dasd volume if they don't already exist
 # Then it will boot MVS/CE
 
+echo "YO!"
+
 # Does the hercules config file exist?
 # If not, copy the config from MVS/CE
 # and replace the folder location with
@@ -50,12 +52,12 @@ done
 
 
 
-for disk in MVSCE/DASD/*; do
-    if [ ! -f /dasd/$(basename $disk) ]; then
-        echo "[*] Copying $disk"
-        cp -v $disk /dasd/
-    fi
-done
+# for disk in MVSCE/DASD/*; do
+#     if [ ! -f /dasd/$(basename $disk) ]; then
+#         echo "[*] Copying $disk"
+#         cp -v $disk /dasd/
+#     fi
+# done
 
 if [ ! -f /certs/ftp.pem ]; then
     echo "[*] /certs/ftp.pem does not exist... generating"
