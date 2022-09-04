@@ -59,25 +59,23 @@ echo "YO!"
 #     fi
 # done
 
-# if [ ! -f /certs/ftp.pem ]; then
-#     echo "[*] /certs/ftp.pem does not exist... generating"
-#     openssl req -x509 -nodes -days 365 \
-#     -subj  "/C=CA/ST=QC/O=FTPD Inc/CN=hercules.ftp" \
-#      -newkey rsa:2048 -keyout /certs/ftp.key \
-#      -out /certs/ftp.crt
-#      cat /certs/ftp.key /certs/ftp.crt > /certs/ftp.pem
+if [ ! -f /MVSCE/certs/ftp.pem ]; then
+    echo "[*] /MVSCE/certs/ftp.pem does not exist... generating"
+    openssl req -x509 -nodes -days 365 \
+    -subj  "/C=CA/ST=QC/O=FTPD Inc/CN=hercules.ftp" \
+     -newkey rsa:2048 -keyout /MVSCE/certs/ftp.key \
+     -out /MVSCE/certs/ftp.crt
+     cat /MVSCE/certs/ftp.key /MVSCE/certs/ftp.crt > /MVSCE/certs/ftp.pem
+fi
 
-# fi
-
-# if [ ! -f /certs/3270.pem ]; then
-#     echo "[*] /certs/3270.pem does not exist... generating"
-#     openssl req -x509 -nodes -days 365 \
-#     -subj  "/C=CA/ST=QC/O=TN3270 Inc/CN=hercules.3270" \
-#      -newkey rsa:2048 -keyout /certs/3270.key \
-#      -out /certs/3270.crt
-#      cat /certs/3270.key /certs/3270.crt > /certs/3270.pem
-
-# fi
+if [ ! -f /MVSCE/certs/3270.pem ]; then
+    echo "[*] /MVSCE/certs/3270.pem does not exist... generating"
+    openssl req -x509 -nodes -days 365 \
+    -subj  "/C=CA/ST=QC/O=TN3270 Inc/CN=hercules.3270" \
+     -newkey rsa:2048 -keyout /MVSCE/certs/3270.key \
+     -out /MVSCE/certs/3270.crt
+     cat /MVSCE/certs/3270.key /MVSCE/certs/3270.crt > /MVSCE/certs/3270.pem
+fi
 
 # TODO no hardcoded port values
 echo "[*] Starting encrypted FTP listener on port 3221"
